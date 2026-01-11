@@ -20,10 +20,13 @@
 
     // Handle File Upload
     if (!empty($_FILES['foto']['name'])) {
-        $nama_file = $_FILES['foto']['name'];
+        $nama_file_asli = $_FILES['foto']['name'];
+        $ext = pathinfo($nama_file_asli, PATHINFO_EXTENSION);
+        $nama_file = uniqid() . "." . $ext;
+
         $tmp_file = $_FILES['foto']['tmp_name'];
         $target_dir = "../../upload/foto/";
-        $target_file = $target_dir . basename($nama_file);
+        $target_file = $target_dir . $nama_file;
         
         if (move_uploaded_file($tmp_file, $target_file)) {
             // Check for existing 'Foto Profil'

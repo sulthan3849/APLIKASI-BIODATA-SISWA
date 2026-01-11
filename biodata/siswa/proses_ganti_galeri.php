@@ -21,7 +21,10 @@ if (!empty($_FILES['foto']['name'])) {
     }
 
     // 3. Upload new file
-    $nama_file = $_FILES['foto']['name'];
+    $nama_file_asli = $_FILES['foto']['name'];
+    $ext = pathinfo($nama_file_asli, PATHINFO_EXTENSION);
+    $nama_file = uniqid() . "." . $ext;
+
     $tmp_file = $_FILES['foto']['tmp_name'];
     $target_dir = "../../upload/foto/";
     move_uploaded_file($tmp_file, $target_dir . $nama_file);
